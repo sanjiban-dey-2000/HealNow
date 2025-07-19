@@ -4,6 +4,7 @@ const express=require('express');
 const path=require('path');
 const cookieParser=require('cookie-parser');
 const {connectDB}=require('./lib/connection');
+const userRouter=require('./routes/authRoutes');
 
 const app=express();
 const PORT=process.env.PORT;
@@ -26,6 +27,8 @@ app.use(cookieParser());
 app.get("/",(req,res)=>{
     res.send("hi there");
 });
+
+app.use('/api/user',userRouter);
 
 app.listen(PORT,()=>{
     console.log(`Server is running at ${PORT}`);
