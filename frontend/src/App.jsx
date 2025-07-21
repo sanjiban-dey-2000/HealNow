@@ -5,6 +5,7 @@ import LandingPage from './pages/LandingPage'
 import ErrorPage from './pages/ErrorPage'
 import TherapistsPage from './pages/TherapistPage'
 import About from './pages/About'
+import Contact from './pages/Contact'
 
 const App = () => {
   const router=createBrowserRouter([
@@ -23,6 +24,10 @@ const App = () => {
         {
           path:"/about",
           element: <About/>
+        },
+        {
+          path:"/contact",
+          element: <Contact/>
         }
       ]
     },
