@@ -4,6 +4,7 @@ import PublicLayout from './components/layouts/PublicLayout'
 import LandingPage from './pages/LandingPage'
 import ErrorPage from './pages/ErrorPage'
 import TherapistsPage from './pages/TherapistPage'
+import About from './pages/About'
 
 const App = () => {
   const router=createBrowserRouter([
@@ -18,6 +19,10 @@ const App = () => {
         },{
           path:'/therapists',
           element: <TherapistsPage/>
+        },
+        {
+          path:"/about",
+          element: <About/>
         }
       ]
     },
