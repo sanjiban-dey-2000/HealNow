@@ -3,6 +3,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom"
 import PublicLayout from './components/layouts/PublicLayout'
 import LandingPage from './pages/LandingPage'
 import ErrorPage from './pages/ErrorPage'
+import TherapistsPage from './pages/TherapistPage'
 
 const App = () => {
   const router=createBrowserRouter([
@@ -14,6 +15,9 @@ const App = () => {
         {
           path:'/',
           element: <LandingPage/>
+        },{
+          path:'/therapists',
+          element: <TherapistsPage/>
         }
       ]
     },
