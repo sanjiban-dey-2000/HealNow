@@ -25,7 +25,7 @@ const Contact = () => {
                 </label>
                 <input
                   type="text"
-                  name="name"
+                  name="fullName"
                   required
                   className="w-full px-4 py-3 border-2 border-gray-500 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-400"
                 />
