@@ -2,7 +2,7 @@ const express=require('express');
 const Contact=require('../model/contactModel');
 const router=express.Router();
 
-router.post('/contact/send-message',async(req,res)=>{
+router.post('/send-message',async(req,res)=>{
     try{
         const {fullName,email,subject,message}=req.body;
         if(!fullName||!email||!subject||!message){

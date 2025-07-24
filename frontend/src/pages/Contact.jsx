@@ -1,6 +1,40 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { sendContactMessage } from "../services/axiosInstance";
 
 const Contact = () => {
+  const [contactData,setContactData]=useState({
+    fullName:"",
+    email:"",
+    subject:"",
+    message:"",
+  });
+
+  const handleFormChange=(e)=>{
+    setContactData({...contactData,[e.target.name]:e.target.value});
+  }
+
+  const postContactData=async(data)=>{
+    try{
+      const res=await sendContactMessage(data);
+      toast.success(res.data?.message);
+    }catch(error){
+      console.log(error.message);
+      toast.error("Something went wrong. Please try again!!");
+    }
+  }
+
+  const handleFormSubmit=(e)=>{
+    e.preventDefault();
+    postContactData(contactData);
+    setContactData({
+    fullName:"",
+    email:"",
+    subject:"",
+    message:"",
+  });
+  }
+
   return (
     <div
       className="relative max-h-screen bg-cover bg-center text-white"
@@ -16,7 +50,7 @@ const Contact = () => {
             Contact Us
           </h2>
 
-          <form className="grid md:grid-cols-2 gap-6">
+          <form className="grid md:grid-cols-2 gap-6" onSubmit={handleFormSubmit}>
             {/* Left Column */}
             <div className="space-y-4">
               <div>
@@ -26,8 +60,10 @@ const Contact = () => {
                 <input
                   type="text"
                   name="fullName"
+                  value={contactData.fullName}
+                  onChange={handleFormChange}
                   required
-                  className="w-full px-4 py-3 border-2 border-gray-500 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-400"
+                  className="w-full px-4 py-3 text-black border-2 border-gray-500 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-400"
                 />
               </div>
 
@@ -38,8 +74,10 @@ const Contact = () => {
                 <input
                   type="email"
                   name="email"
+                  value={contactData.email}
+                  onChange={handleFormChange}
                   required
-                  className="w-full px-4 py-3 border-2 border-gray-500 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-400"
+                  className="w-full px-4 py-3 text-black border-2 border-gray-500 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-400"
                 />
               </div>
 
@@ -50,7 +88,9 @@ const Contact = () => {
                 <input
                   type="text"
                   name="subject"
-                  className="w-full px-4 py-3 border-2 border-gray-500 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-400"
+                  value={contactData.subject}
+                  onChange={handleFormChange}
+                  className="w-full px-4 py-3 text-black border-2 border-gray-500 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-400"
                 />
               </div>
             </div>
@@ -62,8 +102,10 @@ const Contact = () => {
               </label>
               <textarea
                 name="message"
+                value={contactData.message}
+                  onChange={handleFormChange}
                 rows="9"
-                className="w-full px-4 py-3 border-2 border-gray-500 rounded-xl shadow-sm resize-none focus:outline-none focus:ring-2 focus:ring-teal-400"
+                className="w-full px-4 py-3 text-black border-2 border-gray-500 rounded-xl shadow-sm resize-none focus:outline-none focus:ring-2 focus:ring-teal-400"
                 placeholder="Write your message..."
               ></textarea>
 

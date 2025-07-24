@@ -2,6 +2,7 @@ const dotenv=require('dotenv');
 dotenv.config();
 const express=require('express');
 const path=require('path');
+const cors=require('cors');
 const cookieParser=require('cookie-parser');
 const {connectDB}=require('./lib/connection');
 const userRouter=require('./routes/authRoutes');
@@ -18,6 +19,11 @@ connectDB(MONGO_URI).then(()=>{
     console.log(`Error occured in database connection due to ${err.message}`);
 });
 
+app.use(cors({
+    origin:"http://localhost:5173",
+    credentials:true,
+}));
+
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -30,7 +36,7 @@ app.get("/",(req,res)=>{
 });
 
 app.use('/api/user',userRouter);
-app.use('/api',contactRouter);
+app.use('/api/contact',contactRouter);
 
 app.listen(PORT,()=>{
     console.log(`Server is running at ${PORT}`);
