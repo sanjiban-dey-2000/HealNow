@@ -45,7 +45,7 @@ const Header = () => {
             Login
           </Link>
           <Link
-            to="/get-started"
+            to="/signup"
             className="bg-teal-600 text-white text-xl px-4 py-2 rounded-xl hover:bg-teal-700 transition"
           >
             Get Started
