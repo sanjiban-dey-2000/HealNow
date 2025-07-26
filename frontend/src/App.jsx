@@ -7,6 +7,8 @@ import TherapistsPage from './pages/TherapistPage'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import SignupPage from './pages/SignupPage'
+import LoginPage from './pages/LoginPage'
+
 
 const App = () => {
   const router=createBrowserRouter([
@@ -32,6 +34,10 @@ const App = () => {
         },{
           path:"/signup",
           element:<SignupPage/>
+        },
+        {
+          path:"/login",
+          element:<LoginPage/>
         }
       ]
     },
