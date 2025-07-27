@@ -4,12 +4,12 @@ const {handleUserSignup, handleUserLogin}=require('../controllers/authController
 const { handleNormalUserOnboarding, handleTherapistDetails } = require('../controllers/onboardingController');
 const router=express.Router();
 
-router.post('/user/signup',upload.single('image'),handleUserSignup);
+router.post('/signup',handleUserSignup);
 
-router.post('/user/login',handleUserLogin);
+router.post('/login',handleUserLogin);
 
-router.post('/user/onboarding',handleNormalUserOnboarding);
+router.post('/onboarding',handleNormalUserOnboarding);
 
-router.post('/user/therapist',handleTherapistDetails);
+router.post('/therapist',handleTherapistDetails);
 
 module.exports=router;

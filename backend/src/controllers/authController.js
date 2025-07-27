@@ -3,9 +3,10 @@ const JWT=require('jsonwebtoken');
 const bcrypt=require('bcrypt');
 
 async function handleUserSignup(req,res){
+    console.log(req.body);
     try{
         const {fullName,email,password,role}=req.body;
-        if(!fullName||!email||!password||!role||!req.file){
+        if(!fullName||!email||!role||!password){
             return res.status(400).json({
                 message:"Please provide all the fields",
             });
@@ -18,21 +19,18 @@ async function handleUserSignup(req,res){
             });
         }
 
-        const imagePath=`/assets/${req.file.filename}`;
-
         const user=await User.create({
             fullName,
             email,
-            password,
-            profileImage:imagePath,
             role,
+            password,
         });
 
         const token=JWT.sign({ userId: user._id },process.env.JWT_SECRET_KEY,{
             expiresIn:"7d",
         });
 
-        res.cookies('jwt',token,{
+        res.cookie('jwt',token,{
             maxAge:7*24*60*60*1000,
             httpOnly:true,
             sameSite:"strict",

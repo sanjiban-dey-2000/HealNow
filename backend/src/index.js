@@ -26,14 +26,9 @@ app.use(cors({
 
 //middlewares
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
-app.use('/assets',express.static(path.resolve('public/assets')));
+app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
-
-
-app.get("/",(req,res)=>{
-    res.send("hi there");
-});
+app.use('/assets',express.static(path.resolve('public/assets')));
 
 app.use('/api/user',userRouter);
 app.use('/api/contact',contactRouter);

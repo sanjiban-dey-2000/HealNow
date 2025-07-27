@@ -8,3 +8,7 @@ const api=axios.create({
 export const sendContactMessage=async(data)=>{
     return await api.post('/contact/send-message',data);
 }
+
+export const sendSignupData=async(data)=>{
+    return await api.post('/user/signup',data);
+}
