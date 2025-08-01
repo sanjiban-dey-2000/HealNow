@@ -12,3 +12,7 @@ export const sendContactMessage=async(data)=>{
 export const sendSignupData=async(data)=>{
     return await api.post('/user/signup',data);
 }
+
+export const sendLoginData=async(data)=>{
+    return await api.post('/user/login',data);
+}

@@ -75,11 +75,11 @@ async function handleUserLogin(req,res){
             });
         }
 
-        const token=JWT.sign({ userId: user._id },process.env.JWT_SECRET_KEY,{
+        const token=JWT.sign({ userId: existingUser._id },process.env.JWT_SECRET_KEY,{
             expiresIn:"7d",
         });
 
-        res.cookies('jwt',token,{
+        res.cookie('jwt',token,{
             maxAge:7*24*60*60*1000,
             httpOnly:true,
             sameSite:"strict",
