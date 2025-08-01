@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { sendSignupData } from "../services/axiosInstance";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [signupData,setSingupData]=useState({
@@ -11,6 +12,7 @@ const Signup = () => {
     password:"",
     confirmPassword:"",
   });
+  const navigate=useNavigate();
 
   const [passwordMatch,setPasswordMatch]=useState("");
 
@@ -31,6 +33,11 @@ const Signup = () => {
       const res=await sendSignupData(data);
       console.log(res.data);
       toast.success(res.data?.message);
+      if(res.data?.user.role==="User"){
+        navigate('/userOnboarding');
+      }else{
+        navigate('/therapistOnboarding');
+      }
     }catch(error){
       console.log(error.message);
       toast.error("Something went wrong. Please try again!!");

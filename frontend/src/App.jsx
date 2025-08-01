@@ -8,6 +8,7 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 import SignupPage from './pages/SignupPage'
 import LoginPage from './pages/LoginPage'
+import TherapistOnboarding from './pages/TherapistOnboarding'
 
 
 const App = () => {
@@ -38,6 +39,10 @@ const App = () => {
         {
           path:"/login",
           element:<LoginPage/>
+        },
+        {
+          path:"/therapistOnboarding",
+          element:<TherapistOnboarding/>
         }
       ]
     },
