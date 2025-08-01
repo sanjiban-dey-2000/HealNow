@@ -3,8 +3,8 @@ const Therapist=require('../model/therapistModel');
 
 async function handleNormalUserOnboarding(req,res){
     try{
-        const {userId,dob,gender,phone,address,occupation}=req.body;
-        if(!userId||!dob||!gender||!phone||!address||!occupation){
+        const {userId,dob,gender,phone,address,occupation,bio}=req.body;
+        if(!userId||!dob||!gender||!phone||!address||!occupation||!bio){
             return res.status(400).json({
                 message:"Please provide all the fields to be onboard",
             });
@@ -17,6 +17,7 @@ async function handleNormalUserOnboarding(req,res){
             phone,
             address,
             occupation,
+            bio,
         });
 
         res.status(200).json({

@@ -22,6 +22,9 @@ const normalUserSchema=new mongoose.Schema({
     occupation:{
         type:String
     },
+    bio:{
+        type:String,
+    }
 },{
     timestamps:true,
 });

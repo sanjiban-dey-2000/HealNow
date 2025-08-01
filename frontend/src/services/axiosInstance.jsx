@@ -20,3 +20,7 @@ export const sendLoginData=async(data)=>{
 export const sendTherapistOnboardingData=async(data)=>{
     return await api.post('/user/therapist',data);
 }
+
+export const sendUserOnboardingData=async(data)=>{
+    return await api.post('/user/onboarding',data);
+}

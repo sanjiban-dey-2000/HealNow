@@ -9,6 +9,7 @@ import Contact from './pages/Contact'
 import SignupPage from './pages/SignupPage'
 import LoginPage from './pages/LoginPage'
 import TherapistOnboarding from './pages/TherapistOnboarding'
+import UserOnboarding from './pages/UserOnboarding'
 
 
 const App = () => {
@@ -43,6 +44,10 @@ const App = () => {
         {
           path:"/therapistOnboarding",
           element:<TherapistOnboarding/>
+        },
+        {
+          path:"/userOnboarding",
+          element: <UserOnboarding/>
         }
       ]
     },
