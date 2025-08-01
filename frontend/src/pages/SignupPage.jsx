@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { sendSignupData } from "../services/axiosInstance";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Signup = () => {
   const [signupData,setSingupData]=useState({
@@ -13,6 +14,7 @@ const Signup = () => {
     confirmPassword:"",
   });
   const navigate=useNavigate();
+  const {signup:newUser}=useAuth();
 
   const [passwordMatch,setPasswordMatch]=useState("");
 
@@ -33,6 +35,7 @@ const Signup = () => {
       const res=await sendSignupData(data);
       console.log(res.data);
       toast.success(res.data?.message);
+      newUser(res.data?.user);
       if(res.data?.user.role==="User"){
         navigate('/userOnboarding');
       }else{
@@ -46,12 +49,6 @@ const Signup = () => {
 
   const handleFormSubmit=(e)=>{
     e.preventDefault();
-    // const formData=new FormData;
-    // formData.append('fullName',signupData.fullName);
-    // formData.append('email',signupData.email);
-    // formData.append('role',signupData.role);
-    // formData.append('password',signupData.password);
-
     postSingupData(signupData);
     setSingupData({
     fullName:"",

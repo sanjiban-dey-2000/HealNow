@@ -16,3 +16,7 @@ export const sendSignupData=async(data)=>{
 export const sendLoginData=async(data)=>{
     return await api.post('/user/login',data);
 }
+
+export const sendTherapistOnboardingData=async(data)=>{
+    return await api.post('/user/therapist',data);
+}
