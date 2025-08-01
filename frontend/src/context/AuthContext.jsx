@@ -7,7 +7,6 @@ export const AuthProvider=({children})=>{
 
     const login=(userData)=>setUser(userData);
     const signup=(userData)=>setUser(userData);
-    console.log(user);
 
     return (
         <AuthContext.Provider value={{user,login,signup}}>

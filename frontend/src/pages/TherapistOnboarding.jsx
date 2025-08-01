@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import {useNavigate} from "react-router-dom";
+import { sendTherapistOnboardingData } from "../services/axiosInstance";
+import toast from "react-hot-toast";
 
 const TherapistOnboarding = () => {
   const [formData, setFormData] = useState({
+    userId:"",
     phone: "",
     gender: "",
     address: "",
@@ -9,22 +14,40 @@ const TherapistOnboarding = () => {
     bio: "",
   });
 
+  const {user}=useAuth();
+  const navigate=useNavigate();
+
+  useEffect(()=>{
+    if(user?._id){
+      setFormData((prev)=>({...prev,userId:user._id}));
+    }
+  },[user]);
+
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData({...formData,[e.target.name]:e.target.value});
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // TODO: Send data to backend via fetch or axios
+    postOnboardingData(formData);
     console.log("Submitting therapist profile:", formData);
   };
 
+  const postOnboardingData=async(data)=>{
+    try{
+      const res=await sendTherapistOnboardingData(data);
+      console.log(res.data);
+      toast.success(res.data?.message);
+      navigate('/login');
+    }catch(error){
+      console.log(error.message);
+      toast.error("Something went wrong. Please try again!!!");
+    }
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-white to-indigo-100 flex items-center justify-center px-6 py-12">
+    <div className="max-h-screen bg-gradient-to-br from-teal-50 via-white to-indigo-100 flex items-center justify-center px-6 py-12">
       <div className="w-full max-w-5xl bg-white/90 backdrop-blur-md shadow-2xl rounded-2xl p-8 sm:p-10">
         <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
           Therapist Onboarding
