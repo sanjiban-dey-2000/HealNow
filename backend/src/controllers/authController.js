@@ -87,7 +87,7 @@ async function handleUserLogin(req,res){
 
         res.status(200).json({
             message:"Logged in successfully",
-            existingUser,
+            user:existingUser,
         });
     }catch(error){
         console.log(error);

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { sendLoginData } from "../services/axiosInstance";
 import { useNavigate } from "react-router-dom";
+import {useAuth} from "../context/AuthContext";
 
 const LoginPage = () => {
   const [loginData, setLoginData] = useState({
@@ -11,6 +12,7 @@ const LoginPage = () => {
   });
 
   const navigate=useNavigate();
+  const {login:newUser}=useAuth();
 
   const handleFormChange = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
@@ -21,6 +23,7 @@ const LoginPage = () => {
       const res = await sendLoginData(data);
       console.log(res.data);
       toast.success(res.data?.message);
+      newUser(res.data.user);
       navigate('/dashboard');
     } catch (error) {
       console.log(error.message);
