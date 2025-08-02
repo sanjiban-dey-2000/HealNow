@@ -121,4 +121,5 @@ const handleUserLogout=async()=>{
 module.exports={
     handleUserSignup,
     handleUserLogin,
+    handleUserLogout,
 }

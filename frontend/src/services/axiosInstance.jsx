@@ -21,6 +21,10 @@ export const sendTherapistOnboardingData=async(data)=>{
     return await api.post('/user/therapist',data);
 }
 
+export const postLogout=async()=>{
+    return await api.post('/user/logout');
+}
+
 export const sendUserOnboardingData=async(data)=>{
     return await api.post('/user/onboarding',data);
 }

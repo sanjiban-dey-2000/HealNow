@@ -1,6 +1,6 @@
 const express=require('express');
 const upload=require('../middlewares/uploadImage');
-const {handleUserSignup, handleUserLogin}=require('../controllers/authController');
+const {handleUserSignup, handleUserLogin, handleUserLogout}=require('../controllers/authController');
 const { handleNormalUserOnboarding, handleTherapistDetails } = require('../controllers/onboardingController');
 const { protectRoute } = require('../middlewares/protectRoute');
 const router=express.Router();
@@ -18,5 +18,7 @@ router.get('/verify',protectRoute,(req,res)=>{
         user:req.user,
     });
 })
+
+router.post('/logout',handleUserLogout);
 
 module.exports=router;
