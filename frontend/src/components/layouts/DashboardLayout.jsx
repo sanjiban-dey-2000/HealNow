@@ -1,10 +1,16 @@
-import { Outlet, Link } from "react-router-dom";
-import { FaUserFriends, FaRegComments, FaPlusCircle } from "react-icons/fa";
+import { Outlet, Link, useNavigate } from "react-router-dom";
+import { FaUserFriends, FaRegComments, FaPlusCircle, FaSignOutAlt } from "react-icons/fa";
 import { AiOutlineRobot } from "react-icons/ai";
 import { useAuth } from "../../context/AuthContext";
 
 const DashboardLayout = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout(); // assuming this sets user to null
+    navigate("/login");
+  };
 
   return (
     <div className="flex min-h-screen bg-gray-100">
@@ -41,8 +47,15 @@ const DashboardLayout = () => {
         {/* Top Navbar */}
         <header className="bg-white shadow-md p-4 flex justify-between items-center">
           <h1 className="text-xl font-semibold text-gray-800">Dashboard</h1>
-          <div>
-            <span className="text-sm text-gray-600">{user?.email}</span>
+          <div className="flex items-center gap-4">
+            <span className="text-sm text-gray-600 hidden sm:block">{user?.email}</span>
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-2 text-sm text-white bg-red-500 hover:bg-red-600 px-3 py-2 rounded transition"
+            >
+              <FaSignOutAlt />
+              Logout
+            </button>
           </div>
         </header>
 

@@ -97,7 +97,7 @@ async function handleUserLogin(req,res){
     }
 }
 
-const handleUserLogout=async()=>{
+const handleUserLogout=async(req,res)=>{
     try{
         res.clearCookie('jwt',{
             httpOnly:true,
