@@ -44,7 +44,7 @@ const Contact = () => {
       <div className="absolute inset-0 bg-black/60 z-0" />
 
       {/* Form Section */}
-      <div className="relative z-10 flex items-center justify-center min-h-screen px-6 py-16">
+      <div className="relative z-10 flex items-center justify-center min-h-screen px-6 py-10">
         <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl max-w-5xl w-full p-8 md:p-12">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">
             Contact Us
