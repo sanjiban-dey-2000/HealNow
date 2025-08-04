@@ -9,6 +9,7 @@ import {
 import { AiOutlineRobot } from "react-icons/ai";
 import { useAuth } from "../../context/AuthContext";
 import { useState } from "react";
+import { sendChatBotmsg } from "../../services/axiosInstance";
 
 const DashboardLayout = () => {
   const { user, logout } = useAuth();
@@ -24,17 +25,24 @@ const DashboardLayout = () => {
     },
   ]);
 
-  const handleSendMessage = () => {
-    if (message.trim()) {
-      setChatHistory((prev) => [
-        ...prev,
-        { sender: "user", text: message },
-        {
-          sender: "ai",
-          text: "Thanks for sharing! Self-care and short walks help a lot.",
-        },
-      ]);
-      setMessage("");
+  const handleSendMessage = async () => {
+    try {
+      const res = await sendChatBotmsg(message);
+      console.log(res.data?.reply);
+      if (message.trim()) {
+        setChatHistory((prev) => [
+          ...prev,
+          { sender: "user", text: message },
+          {
+            sender: "ai",
+            text: res.data?.reply,
+          },
+        ]);
+
+        setMessage("");
+      }
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
@@ -66,7 +74,10 @@ const DashboardLayout = () => {
             <Link to="/dashboard/therapists" className="hover:text-indigo-400">
               <FaRegComments className="inline mr-2" /> Therapists
             </Link>
-            <Link to="/dashboard/update-profile" className="hover:text-indigo-400">
+            <Link
+              to="/dashboard/update-profile"
+              className="hover:text-indigo-400"
+            >
               <FaUserEdit className="inline mr-2" /> Update Profile
             </Link>
           </nav>
@@ -119,6 +130,7 @@ const DashboardLayout = () => {
           <div className="mt-4">
             <input
               type="text"
+              name="message"
               placeholder="Ask something..."
               value={message}
               onChange={(e) => setMessage(e.target.value)}
@@ -140,7 +152,9 @@ const DashboardLayout = () => {
         <Link
           to="/dashboard"
           className={`flex flex-col items-center text-sm ${
-            location.pathname === "/dashboard" ? "text-indigo-400" : "text-gray-300"
+            location.pathname === "/dashboard"
+              ? "text-indigo-400"
+              : "text-gray-300"
           }`}
         >
           <FaUserFriends size={18} />

@@ -28,3 +28,7 @@ export const postLogout=async()=>{
 export const sendUserOnboardingData=async(data)=>{
     return await api.post('/user/onboarding',data);
 }
+
+export const sendChatBotmsg=async(data)=>{
+    return await api.post('/aiChat/',data);
+}
