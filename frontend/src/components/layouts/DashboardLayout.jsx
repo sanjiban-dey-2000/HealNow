@@ -46,7 +46,7 @@ const DashboardLayout = () => {
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-[#0e0e0e] text-white relative">
       {/* Left Sidebar (Desktop Only) */}
-      <aside className="hidden md:flex md:fixed md:top-0 md:bottom-0 md:left-0 w-64 bg-[#1a1a1a] p-6 border-r border-gray-800 flex-col justify-between z-10">
+      <aside className="hidden md:flex md:fixed md:top-0 md:bottom-0 md:left-0 w-80 bg-[#1a1a1a] p-6 border-r border-gray-800 flex-col justify-between z-10">
         <div>
           <div className="flex flex-col items-center">
             <img
@@ -83,8 +83,8 @@ const DashboardLayout = () => {
       {/* Main Content */}
       <main className="flex-1 md:ml-64 md:mr-96 p-4 pt-6 overflow-y-auto">
         <header className="mb-4 flex justify-between items-center">
-          <h1 className="text-xl font-bold text-indigo-400">Feed</h1>
-          <span className="text-sm text-gray-400 hidden md:block">
+          <h1 className="text-2xl font-bold text-indigo-400 ml-[70px]">Feed</h1>
+          <span className="text-sm mr-3 text-gray-400 hidden md:block">
             {user?.email}
           </span>
         </header>
@@ -92,12 +92,12 @@ const DashboardLayout = () => {
       </main>
 
       {/* Right Chat Panel (Desktop Only) */}
-      <aside className="hidden lg:flex fixed top-0 right-0 bottom-0 w-96 bg-[#1a1a1a] border-l border-gray-800 p-4 flex-col justify-between z-10">
+      <aside className="hidden lg:flex fixed top-0 right-0 bottom-0 w-100 bg-[#1a1a1a] border-l border-gray-800 p-4 flex-col justify-between z-10">
         <div className="flex flex-col h-full">
           <div className="flex items-center gap-2 mb-4">
             <AiOutlineRobot className="text-indigo-400 text-2xl" />
             <h3 className="text-xl font-semibold text-indigo-300">
-              AI Mental Chat
+              Aurix-AI Mental Chat
             </h3>
           </div>
 
