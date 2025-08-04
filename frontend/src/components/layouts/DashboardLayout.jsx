@@ -28,7 +28,6 @@ const DashboardLayout = () => {
   const handleSendMessage = async () => {
     try {
       const res = await sendChatBotmsg(message);
-      console.log(res.data?.reply);
       if (message.trim()) {
         setChatHistory((prev) => [
           ...prev,
