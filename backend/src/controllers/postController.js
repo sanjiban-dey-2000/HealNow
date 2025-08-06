@@ -27,6 +27,22 @@ async function handleCreatePost(req,res){
     }
 }
 
+async function handleGetPosts(req,res){
+    try{
+        const posts=await Post.find({});
+        res.status(200).json({
+            posts,
+        });
+    }catch(error){
+        console.log(error.message);
+        res.status(500).json({
+            message:"Error in getting posts route",
+            error,
+        });
+    }
+}
+
 module.exports={
     handleCreatePost,
+    handleGetPosts,
 }
