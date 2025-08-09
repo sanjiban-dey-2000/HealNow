@@ -1,37 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaHeart, FaRegComment } from "react-icons/fa";
-
-const dummyPosts = [
-  {
-    id: 1,
-    username: "ananya_s",
-    userImage: "/avatar.png",
-    image: "/post1.jpg",
-    caption: "Taking one day at a time 🧘‍♀️ #MentalHealthMatters",
-    likes: 34,
-  },
-  {
-    id: 2,
-    username: "rohitk",
-    userImage: "/avatar.png",
-    image: "/post2.jpg",
-    caption: "Nature therapy always helps 🌿",
-    likes: 72,
-  },
-];
+import toast from "react-hot-toast";
+import { getPosts } from "../services/axiosInstance";
 
 const DashboardHome = () => {
   const [commentsOpen, setCommentsOpen] = useState({});
+  const [stories,setStories]=useState([]);
 
   const toggleComment = (id) => {
     setCommentsOpen((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
+  const getPostData=async()=>{
+    try{
+      const res=await getPosts();
+      console.log(res.data);
+      setStories(res.data?.posts);
+    }catch(error){
+      console.log(error.message);
+      toast.error("Something went wrong.Please try again!!!");
+    }
+  }
+
+  useEffect(()=>{
+    getPostData();
+  },[]);
+
   return (
     <div className="space-y-6 max-w-3xl mx-auto px-4 pb-20">
-      {dummyPosts.map((post) => (
+      {stories.map((post) => (
         <div
-          key={post.id}
+          key={post._id}
           className="bg-[#1a1a1a] rounded-xl shadow-lg overflow-hidden border border-gray-800"
         >
           {/* Post Header */}
@@ -49,14 +48,14 @@ const DashboardHome = () => {
 
           {/* Post Image */}
           <img
-            src={post.image}
+            src={`http://localhost:8001${post.media}`}
             alt="post"
             className="w-full object-cover h-64 sm:h-80 md:h-[400px]"
           />
 
           {/* Post Caption */}
           <div className="p-4">
-            <p className="text-gray-300 text-sm">{post.caption}</p>
+            <p className="text-gray-300 text-sm">{post.content}</p>
           </div>
 
           {/* Like + Comment Actions Left-Aligned */}

@@ -36,3 +36,7 @@ export const sendChatBotmsg=async(data)=>{
 export const createPost=async(formData)=>{
     return await api.post('/post/create-post',formData);
 }
+
+export const getPosts=async()=>{
+    return await api.get('/post/get-posts');
+}

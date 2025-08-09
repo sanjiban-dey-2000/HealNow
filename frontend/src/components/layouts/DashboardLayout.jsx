@@ -63,7 +63,7 @@ const DashboardLayout = () => {
         {/* Main Content */}
         <main className="flex-1 md:ml-64 md:mr-96 p-4 pt-6 overflow-y-auto">
           <header className="mb-4 flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-indigo-400 ml-[70px]">
+            <h1 className="text-2xl font-bold text-indigo-400 md:ml-[70px]">
               Feed
             </h1>
           </header>
