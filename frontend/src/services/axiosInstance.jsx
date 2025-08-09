@@ -32,3 +32,7 @@ export const sendUserOnboardingData=async(data)=>{
 export const sendChatBotmsg=async(data)=>{
     return await api.post('/aiChat/',data);
 }
+
+export const createPost=async(formData)=>{
+    return await api.post('/post/create-post',formData);
+}

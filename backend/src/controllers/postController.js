@@ -42,7 +42,12 @@ async function handleGetPosts(req,res){
     }
 }
 
+async function handleLikePost(req,res){
+
+}
+
 module.exports={
     handleCreatePost,
     handleGetPosts,
+    handleLikePost
 }
