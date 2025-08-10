@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { FaHeart, FaRegComment } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { getPosts } from "../services/axiosInstance";
+import TimeAgo from "timeago-react";
 
 const DashboardHome = () => {
   const [commentsOpen, setCommentsOpen] = useState({});
@@ -41,8 +42,8 @@ const DashboardHome = () => {
               className="w-10 h-10 rounded-full object-cover border-2 border-indigo-500"
             />
             <div className="ml-3">
-              <h3 className="text-base font-semibold text-white">{post.username}</h3>
-              <p className="text-xs text-gray-400">Just now</p>
+              <h3 className="text-base font-semibold text-white">{post.userId.fullName}</h3>
+              <p className="text-xs text-gray-400"><TimeAgo datetime={post.createdAt}/></p>
             </div>
           </div>
 

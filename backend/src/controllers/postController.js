@@ -1,4 +1,5 @@
 const Post=require('../model/postModel');
+const User=require('../model/userModel');
 
 async function handleCreatePost(req,res){
     try{
@@ -13,6 +14,7 @@ async function handleCreatePost(req,res){
         }
 
         await newPost.save();
+
         res.status(201).json({
             post:newPost,
             message:"Post created",
@@ -29,9 +31,9 @@ async function handleCreatePost(req,res){
 
 async function handleGetPosts(req,res){
     try{
-        const posts=await Post.find({});
+        const posts=await Post.find({}).populate("userId","fullName").populate("comments.user","fullName");
         res.status(200).json({
-            posts,
+            posts
         });
     }catch(error){
         console.log(error.message);
