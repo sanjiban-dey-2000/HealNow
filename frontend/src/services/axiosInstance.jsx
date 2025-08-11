@@ -40,3 +40,7 @@ export const createPost=async(formData)=>{
 export const getPosts=async()=>{
     return await api.get('/post/get-posts');
 }
+
+export const getTherapists=async()=>{
+    return await api.get('/therapist/');
+}

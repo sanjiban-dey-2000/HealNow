@@ -13,6 +13,7 @@ import UserOnboarding from "./pages/UserOnboarding";
 import ProtectedRoute from "./middleware/ProtectedRoute";
 import DashboardLayout from "./components/layouts/DashboardLayout";
 import DashboardHome from "./pages/DashboardHome";
+import Therapist from "./pages/Therapist";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -66,6 +67,10 @@ const App = () => {
         {
           index:true,
           element:<DashboardHome/>
+        },
+        {
+          path:"/dashboard/therapists",
+          element: <Therapist/>
         }
       ]
     },
