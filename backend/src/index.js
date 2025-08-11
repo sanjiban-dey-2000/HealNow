@@ -9,6 +9,7 @@ const userRouter=require('./routes/authRoutes');
 const contactRouter=require('./routes/contactusRoute');
 const aiChatRouter=require('./routes/chatRoute');
 const postRouter=require('./routes/postRoutes');
+const therapistRouter=require('./routes/TherapistRoute');
 
 const app=express();
 const PORT=process.env.PORT;
@@ -36,6 +37,7 @@ app.use('/api/user',userRouter);
 app.use('/api/contact',contactRouter);
 app.use('/api/aiChat',aiChatRouter);
 app.use('/api/post',postRouter);
+app.use('/api/therapist',therapistRouter);
 
 app.listen(PORT,()=>{
     console.log(`Server is running at ${PORT}`);
