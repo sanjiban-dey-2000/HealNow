@@ -22,17 +22,12 @@ const DashboardLayout = () => {
   const handleSendMessage = async () => {
     try {
       const res = await sendChatBotmsg(message);
-      console.log(res.data?.reply);
       if (message.trim()) {
         setChatHistory((prev) => [
           ...prev,
           { sender: "user", text: message },
-          {
-            sender: "ai",
-            text: res.data?.reply,
-          },
+          { sender: "ai", text: res.data?.reply },
         ]);
-
         setMessage("");
       }
     } catch (error) {
@@ -40,15 +35,12 @@ const DashboardLayout = () => {
     }
   };
 
-  
-
   return (
     <>
       <Toaster
         position="top-center"
         reverseOrder={false}
         toastOptions={{
-          className: "",
           style: {
             padding: "16px",
             fontSize: "18px",
@@ -56,12 +48,19 @@ const DashboardLayout = () => {
           },
         }}
       />
-      <div className="min-h-screen flex flex-col md:flex-row bg-[#0e0e0e] text-white relative">
-        {/* Left Sidebar (Desktop Only) */}
-        <DashboardHeader/>
 
-        {/* Main Content */}
-        <main className="flex-1 md:ml-64 md:mr-96 p-4 pt-6 overflow-y-auto">
+      <div className="min-h-screen flex flex-col md:flex-row text-white relative">
+        {/* Left Sidebar */}
+        <DashboardHeader />
+
+        {/* Main Content with background image */}
+        <main
+          className="flex-1 md:ml-64 md:mr-96 p-4 pt-6 overflow-y-auto bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('/dashboard2.jpg')`, // put your image in public/images
+            backgroundAttachment: "fixed",
+          }}
+        >
           <header className="mb-4 flex justify-between items-center">
             <h1 className="text-2xl font-bold text-indigo-400 md:ml-[70px]">
               Feed
@@ -70,8 +69,10 @@ const DashboardLayout = () => {
           <Outlet />
         </main>
 
-        {/* Right Chat Panel (Desktop Only) */}
-        <aside className="hidden lg:flex fixed top-0 right-0 bottom-0 w-100 bg-[#1a1a1a] border-l border-gray-800 p-4 flex-col justify-between z-10">
+        {/* Right Chat Panel */}
+        <aside className="hidden lg:flex fixed top-0 right-0 bottom-0 w-100 bg-gradient-to-b from-[#222] to-[#333] border-l border-gray-800 p-4 flex-col justify-between z-10" style={{
+            background: "linear-gradient(180deg, #2a2a2a, #3a3a3a, #4a4a4a)",
+          }}>
           <div className="flex flex-col h-full">
             <div className="flex items-center gap-2 mb-4">
               <AiOutlineRobot className="text-indigo-400 text-2xl" />
@@ -115,7 +116,7 @@ const DashboardLayout = () => {
           </div>
         </aside>
 
-        {/* AI Chat Icon (Mobile) */}
+        {/* AI Chat Icon for Mobile */}
         <button
           onClick={() =>
             alert("AI Chatbot works on desktop! Enable it soon for mobile too.")

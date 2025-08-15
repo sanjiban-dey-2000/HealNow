@@ -7,6 +7,7 @@ import {
   FaPlusCircle,
   FaSignOutAlt,
   FaUserEdit,
+  FaClipboardList,
 } from "react-icons/fa";
 import PostStoryModal from "./PostStoryModal";
 
@@ -21,10 +22,15 @@ const DashboardHeader = ({ onPostCreated }) => {
     navigate("/login");
   };
 
+  const navLinkClasses = (path) =>
+    `hover:text-indigo-400 ${
+      location.pathname === path ? "text-indigo-400" : ""
+    } text-base md:text-lg font-medium`;
+
   return (
     <>
       {/* LEFT SIDEBAR (Desktop) */}
-      <aside className="hidden md:flex md:fixed md:top-0 md:bottom-0 md:left-0 w-80 bg-[#1a1a1a] p-6 border-r border-gray-800 flex-col justify-between z-10">
+      <aside className="hidden md:flex md:fixed md:top-0 md:bottom-0 md:left-0 w-80 bg-gradient-to-b from-gray-900 via-gray-800 via-slate-700 to-black p-6 border-r border-gray-800 flex-col justify-between z-10">
         <div>
           {/* Profile Section */}
           <div className="flex flex-col items-center">
@@ -33,45 +39,38 @@ const DashboardHeader = ({ onPostCreated }) => {
               alt="Profile"
               className="w-20 h-20 rounded-full border-2 border-indigo-500 object-cover"
             />
-            <h2 className="mt-3 text-lg font-semibold">{user?.fullName}</h2>
+            <h2 className="mt-3 text-lg md:text-xl font-semibold">
+              {user?.fullName}
+            </h2>
           </div>
 
           {/* Navigation */}
-          <nav className="mt-8 flex flex-col gap-5 text-base font-medium">
-            <Link
-              to="/dashboard"
-              className={`hover:text-indigo-400 ${
-                location.pathname === "/dashboard" ? "text-indigo-400" : ""
-              }`}
-            >
+          <nav className="mt-8 flex flex-col gap-5">
+            <Link to="/dashboard" className={navLinkClasses("/dashboard")}>
               <FaUserFriends className="inline mr-2" /> Feed
+            </Link>
+
+            <Link to="/dashboard/myposts" className={navLinkClasses("/dashboard/myposts")}>
+              <FaClipboardList className="inline mr-2" /> My Posts
             </Link>
 
             <button
               onClick={() => setPostModalOpen(true)}
-              className="hover:text-indigo-400 text-left"
+              className="hover:text-indigo-400 text-left text-base md:text-lg font-medium"
             >
               <FaPlusCircle className="inline mr-2" /> Post Story
             </button>
 
             <Link
               to="/dashboard/therapists"
-              className={`hover:text-indigo-400 ${
-                location.pathname === "/dashboard/therapists"
-                  ? "text-indigo-400"
-                  : ""
-              }`}
+              className={navLinkClasses("/dashboard/therapists")}
             >
               <FaRegComments className="inline mr-2" /> Therapists
             </Link>
 
             <Link
               to="/dashboard/update-profile"
-              className={`hover:text-indigo-400 ${
-                location.pathname === "/dashboard/update-profile"
-                  ? "text-indigo-400"
-                  : ""
-              }`}
+              className={navLinkClasses("/dashboard/update-profile")}
             >
               <FaUserEdit className="inline mr-2" /> Update Profile
             </Link>
@@ -81,14 +80,14 @@ const DashboardHeader = ({ onPostCreated }) => {
         {/* Logout */}
         <button
           onClick={handleLogout}
-          className="text-red-400 hover:text-red-500 font-medium text-base flex items-center"
+          className="text-red-400 hover:text-red-500 font-medium text-base md:text-lg flex items-center"
         >
           <FaSignOutAlt className="mr-2" /> Logout
         </button>
       </aside>
 
       {/* BOTTOM NAVBAR (Mobile) */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-[#1a1a1a] border-t border-gray-800 flex justify-around items-center py-2 z-50">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-gradient-to-b from-gray-900 via-gray-800 to-black border-t border-gray-800 flex justify-around items-center py-2 z-50">
         <Link
           to="/dashboard"
           className={`flex flex-col items-center text-sm ${
@@ -99,6 +98,18 @@ const DashboardHeader = ({ onPostCreated }) => {
         >
           <FaUserFriends size={18} />
           Feed
+        </Link>
+
+        <Link
+          to="/dashboard/myposts"
+          className={`flex flex-col items-center text-sm ${
+            location.pathname === "/dashboard/myposts"
+              ? "text-indigo-400"
+              : "text-gray-300"
+          }`}
+        >
+          <FaClipboardList size={18} />
+          My Posts
         </Link>
 
         <div
