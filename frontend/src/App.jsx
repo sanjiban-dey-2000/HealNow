@@ -14,6 +14,7 @@ import ProtectedRoute from "./middleware/ProtectedRoute";
 import DashboardLayout from "./components/layouts/DashboardLayout";
 import DashboardHome from "./pages/DashboardHome";
 import Therapist from "./pages/Therapist";
+import DashboardErrorPage from "./pages/DashboardErrorPage";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -63,16 +64,24 @@ const App = () => {
           <DashboardLayout />
         </ProtectedRoute>
       ),
-      children:[
+      children: [
         {
-          index:true,
-          element:<DashboardHome/>
+          index: true,
+          element: <DashboardHome />,
         },
         {
-          path:"/dashboard/therapists",
-          element: <Therapist/>
-        }
-      ]
+          path: "/dashboard/therapists",
+          element: <Therapist />,
+        },
+      ],
+    },
+    {
+      path: "/dashboard/*",
+      element: (
+        <ProtectedRoute>
+          <DashboardErrorPage />
+        </ProtectedRoute>
+      ),
     },
   ]);
 
