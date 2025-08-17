@@ -48,8 +48,24 @@ async function handleLikePost(req,res){
 
 }
 
+async function handleGetMyPost(req,res){
+    try{
+        const posts=await Post.find({userId:req.user._id});
+        res.status(200).json({
+            posts,
+        });
+    }catch(error){
+        console.log(error.message);
+        res.status(500).json({
+            message:"Internal server error in getting my posts",
+            error,
+        });
+    }
+}
+
 module.exports={
     handleCreatePost,
     handleGetPosts,
-    handleLikePost
+    handleLikePost,
+    handleGetMyPost,
 }
