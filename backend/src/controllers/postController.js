@@ -63,9 +63,27 @@ async function handleGetMyPost(req,res){
     }
 }
 
+async function handleDeletePost(req,res){
+    try{
+        const {postId}=req.body;
+        const deletedPost=await Post.findByIdAndDelete(postId);
+        res.status(200).json({
+            message:"Post deleted successfully",
+            deletedPost,
+        });
+    }catch(error){
+        console.log(error.message);
+        res.status(500).json({
+            message:"Internal server error in delete post route",
+            error,
+        });
+    }
+}
+
 module.exports={
     handleCreatePost,
     handleGetPosts,
     handleLikePost,
     handleGetMyPost,
+    handleDeletePost,
 }

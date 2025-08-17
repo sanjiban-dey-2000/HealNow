@@ -1,7 +1,7 @@
 const express=require('express');
 const upload=require('../middlewares/uploadImage');
 const {protectRoute}=require('../middlewares/protectRoute');
-const { handleCreatePost, handleGetPosts, handleLikePost, handleGetMyPost }=require('../controllers/postController');
+const { handleCreatePost, handleGetPosts, handleLikePost, handleGetMyPost, handleDeletePost }=require('../controllers/postController');
 const router=express.Router();
 
 
@@ -12,5 +12,7 @@ router.get('/get-posts',protectRoute,handleGetPosts);
 router.post('/like-post',protectRoute,handleLikePost);
 
 router.get('/myposts',protectRoute,handleGetMyPost);
+
+router.delete('/delete',protectRoute,handleDeletePost);
 
 module.exports=router;
